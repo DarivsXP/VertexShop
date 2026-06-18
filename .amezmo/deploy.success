@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Executing deploy.success"
+
+set -e
+
+cd "${APPLICATION_ROOT}"
+
+php artisan migrate --force
+php artisan db:seed --class=VertexShopSeeder --force
+php scripts/generate-shop-images.php
+
+echo "VertexShop database ready"

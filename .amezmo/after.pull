@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Executing after.pull in ${APPLICATION_ROOT}"
+
+set -e
+
+cd "${APPLICATION_ROOT}"
+
+if [ -f "package.json" ]; then
+    echo "Installing npm dependencies"
+    npm ci --no-audit --no-fund
+
+    echo "Building frontend assets"
+    npm run build
+fi

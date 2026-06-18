@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "Executing before.deploy"
+
+set -e
+
+if [ -d "$APPLICATION_ROOT/storage/app" ]; then
+    echo "Removing current storage/app directory"
+    rm -rf "$APPLICATION_ROOT/storage/app"
+fi
+
+if [ ! -d "$STORAGE_DIRECTORY/app" ]; then
+    mkdir -p "$STORAGE_DIRECTORY/app/public"
+fi
+
+ln -sfn "$STORAGE_DIRECTORY/app" "$APPLICATION_ROOT/storage/app"
+
+if [ -d "$APPLICATION_ROOT/storage/logs" ]; then
+    echo "Removing current storage/logs directory"
+    rm -rf "$APPLICATION_ROOT/storage/logs"
+fi
+
+if [ ! -d "$STORAGE_DIRECTORY/logs" ]; then
+    mkdir -p "$STORAGE_DIRECTORY/logs"
+fi
+
+ln -sfn "$STORAGE_DIRECTORY/logs" "$APPLICATION_ROOT/storage/logs"
+
+ln -sfn "$APPLICATION_ROOT/storage/app/public" "$APPLICATION_ROOT/public/storage"
+
+php artisan storage:link
