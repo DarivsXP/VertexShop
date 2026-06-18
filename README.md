@@ -23,31 +23,6 @@ Full-stack e-commerce demo built with **Laravel**, **React**, **MySQL**, and **S
 | Customer | customer@vertexshop.demo | password |
 | Admin | admin@vertexshop.demo | password |
 
-## Local setup
-
-```bash
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
-php artisan db:seed
-php scripts/generate-shop-images.php   # downloads Unsplash/Pexels photos locally
-npm install && npm run build
-php artisan serve
-```
-
-Visit `http://127.0.0.1:8000`
-
-## Deploy (Amezmo)
-
-Push to GitHub and connect to Amezmo. On deploy, `.amezmo/deploy.success` runs migrations and seeds automatically.
-
-Set in `.env`:
-
-```
-SANCTUM_STATEFUL_DOMAINS=your-domain.com
-```
-
 ## Resume description
 
 Built a full-stack e-commerce platform featuring authentication, product management, shopping cart functionality, order tracking, and responsive user interfaces. Integrated REST APIs and optimized frontend performance for desktop and mobile users.
