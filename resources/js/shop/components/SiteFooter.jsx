@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import BrandLogo from './BrandLogo'
 
 const shopLinks = [
     { to: '/shop', label: 'Shop home' },
@@ -48,9 +49,7 @@ export default function SiteFooter() {
             <div className="shop-container">
                 <div className="shop-footer-grid">
                     <div className="shop-footer-brand">
-                        <Link to="/" className="shop-title shop-footer-logo">
-                            Vertex<span>Shop</span>
-                        </Link>
+                        <BrandLogo className="shop-footer-logo" />
                         <p className="shop-muted">
                             Premium developer gear and a production-grade e-commerce experience — built to showcase
                             modern full-stack craftsmanship.

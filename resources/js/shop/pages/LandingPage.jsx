@@ -4,6 +4,7 @@ import api from '../api'
 import LazyImage from '../components/LazyImage'
 import ProductCard from '../components/ProductCard'
 import { ProductGridSkeleton } from '../components/ProductCardSkeleton'
+import { LOGO_PATH } from '../utils/branding'
 
 const features = [
     {
@@ -84,6 +85,7 @@ export default function LandingPage() {
             <section className="shop-landing-hero">
                 <div className="shop-container shop-landing-hero-grid">
                     <div>
+                        <img src={LOGO_PATH} alt="VertexShop logo" className="shop-landing-logo" width="72" height="72" />
                         <p className="shop-badge">Full-stack e-commerce platform</p>
                         <h1 className="shop-title shop-landing-headline">
                             Gear up.<br />

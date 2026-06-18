@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { useCart } from '../contexts/CartContext'
 import { useTheme } from '../contexts/ThemeContext'
 import SiteFooter from './SiteFooter'
+import BrandLogo from './BrandLogo'
 
 const mainNav = [
     { to: '/', label: 'Home' },
@@ -56,9 +57,7 @@ export default function Layout() {
 
             <header className="shop-nav">
                 <div className="shop-container shop-nav-inner">
-                    <Link to="/" className="shop-title shop-nav-logo">
-                        Vertex<span>Shop</span>
-                    </Link>
+                    <BrandLogo className="shop-nav-logo" />
 
                     <nav className="shop-hide-mobile shop-nav-links">
                         {mainNav.map((item) => navLink(item.to, item.label))}

@@ -432,14 +432,48 @@
 }
 
 .shop-nav-logo {
-    font-size: 1.35rem;
-    color: var(--shop-text);
-    text-decoration: none;
     flex-shrink: 0;
 }
 
-.shop-nav-logo span {
+.shop-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--shop-text);
+}
+
+.shop-brand-logo-image {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.65rem;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--shop-accent) 18%, transparent);
+}
+
+.shop-brand-logo-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.shop-brand-logo-text span {
     color: var(--shop-accent);
+}
+
+.shop-footer-logo.shop-brand-logo {
+    margin-bottom: 0.75rem;
+}
+
+.shop-landing-logo {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--shop-accent) 22%, transparent);
 }
 
 .shop-nav-links {
