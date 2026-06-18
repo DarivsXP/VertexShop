@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libsqlite3-dev \
     libzip-dev \
+    libonig-dev \
     && docker-php-ext-install \
         bcmath \
         mbstring \
