@@ -54,6 +54,57 @@ This starts Laravel, Vite, queue worker, and logs together. Use this while editi
 3. Hard-refresh the browser (`Ctrl+Shift+R`).
 4. Confirm `public/build/manifest.json` exists.
 
+## Deploy on Render
+
+Render does **not** run Laravel with npm alone. Use **Docker** (files are included in this repo).
+
+### 1. Create a PostgreSQL database
+
+In Render Dashboard → **New** → **PostgreSQL** (Free). Copy the **Internal Database URL**.
+
+### 2. Create a Web Service
+
+| Setting | Value |
+|---------|-------|
+| **Repository** | `https://github.com/DarivsXP/VertexShop` |
+| **Branch** | `main` |
+| **Runtime** | **Docker** (not Node) |
+| **Root Directory** | *(leave empty)* |
+| **Build Command** | *(leave empty — Dockerfile handles it)* |
+| **Start Command** | *(leave empty — Dockerfile handles it)* |
+| **Pre-Deploy Command** | *(leave empty)* |
+| **Health Check Path** | `/up` |
+
+### 3. Environment variables
+
+| Key | Value |
+|-----|-------|
+| `APP_ENV` | `production` |
+| `APP_DEBUG` | `false` |
+| `APP_KEY` | Run `php artisan key:generate --show` locally and paste |
+| `APP_URL` | `https://YOUR-SERVICE.onrender.com` |
+| `DB_CONNECTION` | `pgsql` |
+| `DB_URL` | Internal Database URL from step 1 |
+| `SESSION_DRIVER` | `database` |
+| `CACHE_STORE` | `database` |
+| `QUEUE_CONNECTION` | `database` |
+| `SESSION_SECURE_COOKIE` | `true` |
+| `LOG_CHANNEL` | `stderr` |
+| `SANCTUM_STATEFUL_DOMAINS` | `YOUR-SERVICE.onrender.com` |
+
+Replace `YOUR-SERVICE` with your actual Render hostname (no `https://`).
+
+### 4. Deploy
+
+Push to `main` or click **Manual Deploy**. First deploy takes ~5–10 minutes.
+
+**Or** use the blueprint: Dashboard → **New** → **Blueprint** → connect repo (uses `render.yaml`).
+
+### Why your previous deploy failed
+
+- **Runtime was wrong** — `npm install; npm run build` only builds the React UI, not a PHP server.
+- **Start command was wrong** — npm cannot start Laravel; you need nginx + PHP-FPM (included in the `Dockerfile`).
+
 ## Deploy (Amezmo)
 
 ## Resume description
