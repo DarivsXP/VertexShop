@@ -13,6 +13,8 @@ services:
     runtime: docker
     plan: free
     branch: main
+    dockerfilePath: ./Dockerfile
+    dockerCommand: /start.sh
     healthCheckPath: /up
     autoDeployTrigger: commit
     envVars:

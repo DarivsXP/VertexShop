@@ -64,16 +64,20 @@ In Render Dashboard → **New** → **PostgreSQL** (Free). Copy the **Internal D
 
 ### 2. Create a Web Service
 
+**Important:** If your service shows **Build Command** and **Start Command** fields pre-filled with `npm install`, you are on the **Node** runtime — not Docker. Render will not work for Laravel that way. You must either create a **new** service with Language = **Docker**, or deploy via **Blueprint** (see step 4).
+
 | Setting | Value |
 |---------|-------|
 | **Repository** | `https://github.com/DarivsXP/VertexShop` |
 | **Branch** | `main` |
-| **Runtime** | **Docker** (not Node) |
-| **Root Directory** | *(leave empty)* |
-| **Build Command** | *(leave empty — Dockerfile handles it)* |
-| **Start Command** | *(leave empty — Dockerfile handles it)* |
-| **Pre-Deploy Command** | *(leave empty)* |
+| **Language / Runtime** | **Docker** (scroll the dropdown — it is NOT Node) |
+| **Dockerfile Path** | `./Dockerfile` |
+| **Docker Command** | `/start.sh` *(only if the field is required; otherwise leave empty)* |
+| **Build Command** | *This field should NOT appear for Docker* |
+| **Start Command** | *This field should NOT appear for Docker* |
 | **Health Check Path** | `/up` |
+
+When **Docker** is selected correctly, Render builds from the `Dockerfile` automatically. You do **not** run `npm install` in the dashboard.
 
 ### 3. Environment variables
 
@@ -98,7 +102,12 @@ Replace `YOUR-SERVICE` with your actual Render hostname (no `https://`).
 
 Push to `main` or click **Manual Deploy**. First deploy takes ~5–10 minutes.
 
-**Or** use the blueprint: Dashboard → **New** → **Blueprint** → connect repo (uses `render.yaml`).
+### 4b. Easiest path: Blueprint (recommended if stuck on Node runtime)
+
+1. Render Dashboard → **New** → **Blueprint**
+2. Connect `DarivsXP/VertexShop`
+3. Render reads `render.yaml` and creates PostgreSQL + Docker web service automatically
+4. After deploy, set `APP_URL` and `SANCTUM_STATEFUL_DOMAINS` to your `*.onrender.com` hostname
 
 ### Why your previous deploy failed
 
