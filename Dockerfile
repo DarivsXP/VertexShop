@@ -32,7 +32,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gettext-base \
     libpq-dev \
     libsqlite3-dev \
-    && docker-php-ext-install pdo pdo_pgsql pdo_sqlite \
+    libzip-dev \
+    && docker-php-ext-install \
+        bcmath \
+        mbstring \
+        opcache \
+        pdo \
+        pdo_pgsql \
+        pdo_sqlite \
+        zip \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/html

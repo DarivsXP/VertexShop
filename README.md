@@ -88,7 +88,7 @@ When **Docker** is selected correctly, Render builds from the `Dockerfile` autom
 | `APP_KEY` | Run `php artisan key:generate --show` locally and paste |
 | `APP_URL` | `https://YOUR-SERVICE.onrender.com` |
 | `DB_CONNECTION` | `pgsql` |
-| `DB_URL` | Internal Database URL from step 1 |
+| `DB_URL` | Internal Database URL from step 1 *(or link the database in Render — it injects `DATABASE_URL`, which also works)* |
 | `SESSION_DRIVER` | `database` |
 | `CACHE_STORE` | `database` |
 | `QUEUE_CONNECTION` | `database` |
@@ -113,6 +113,13 @@ Push to `main` or click **Manual Deploy**. First deploy takes ~5–10 minutes.
 
 - **Runtime was wrong** — `npm install; npm run build` only builds the React UI, not a PHP server.
 - **Start command was wrong** — npm cannot start Laravel; you need nginx + PHP-FPM (included in the `Dockerfile`).
+
+### 500 Server Error after deploy
+
+1. **Check Render logs** — Dashboard → your web service → **Logs**. Look for `ERROR: APP_KEY is not set`, migration failures, or PHP fatal errors.
+2. **Required env vars** — `APP_KEY`, `APP_URL` (`https://your-app.onrender.com`), `DB_CONNECTION=pgsql`, and either `DB_URL` or a linked PostgreSQL database (`DATABASE_URL`).
+3. **Temporarily debug** — set `APP_DEBUG=true`, redeploy, refresh the page to see the real error, then set it back to `false`.
+4. **Redeploy latest `main`** — recent Docker fixes add `mbstring`, map `DATABASE_URL`, and clear stale config cache on boot.
 
 ## Deploy (Amezmo)
 
